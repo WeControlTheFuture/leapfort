@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hosts>
+	<host>
+		<name>dubbo</name>
+		<ip>10.1.130.84</ip>
+		<port>22</port>
+		<username>pabas01</username>
+		<password>pabas01@123</password>
+	</host>
+	<host>
+		<name>redis</name>
+		<ip>10.1.1.130</ip>
+		<port>22</port>
+		<username>zk001</username>
+		<password></password>
+	</host>
+	<host>
+		<name>kafka</name>
+		<ip>10.1.1.130</ip>
+		<port>22</port>
+		<username>zk001</username>
+		<password></password>
+	</host>
+</hosts>
