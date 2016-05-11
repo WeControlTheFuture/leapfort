@@ -12,8 +12,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/sb-admin.css" rel="stylesheet">
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<script src="js/jquery-1.12.3.js"></script>
-<script src="js/term.js"></script>
+
 </head>
 <body>
 	<div id="wrapper">
@@ -38,7 +37,22 @@
 					<li class="message-preview"><a href="#">
 							<div class="media">
 								<span class="pull-left"> <img class="media-object"
-									src="http://placehold.it/50x50" alt="">
+									src="images/text.png" alt="">
+								</span>
+								<div class="media-body">
+									<h5 class="media-heading">
+										<strong>John Smith</strong>
+									</h5>
+									<p class="small text-muted">
+										<i class="fa fa-clock-o"></i> Yesterday at 4:32 PM
+									</p>
+									<p>Lorem ipsum dolor sit amet, consectetur...</p>
+								</div>
+							</div>
+					</a></li>
+					<li class="message-preview"><a href="#">
+							<div class="media">
+								<span class="pull-left"> <img class="media-object" src="images/text.png" alt="">
 								</span>
 								<div class="media-body">
 									<h5 class="media-heading">
@@ -54,23 +68,7 @@
 					<li class="message-preview"><a href="#">
 							<div class="media">
 								<span class="pull-left"> <img class="media-object"
-									src="http://placehold.it/50x50" alt="">
-								</span>
-								<div class="media-body">
-									<h5 class="media-heading">
-										<strong>John Smith</strong>
-									</h5>
-									<p class="small text-muted">
-										<i class="fa fa-clock-o"></i> Yesterday at 4:32 PM
-									</p>
-									<p>Lorem ipsum dolor sit amet, consectetur...</p>
-								</div>
-							</div>
-					</a></li>
-					<li class="message-preview"><a href="#">
-							<div class="media">
-								<span class="pull-left"> <img class="media-object"
-									src="http://placehold.it/50x50" alt="">
+									src="images/text.png" alt="">
 								</span>
 								<div class="media-body">
 									<h5 class="media-heading">
@@ -125,82 +123,12 @@
 			</ul>
 		</div>
 		</nav>
-		<div id="page-wrapper" style="padding-left: 0">
-			<script type="text/javascript">
-			computeMaxTerminalSize = function() {
-				rows = Math.round($(window).height() / 14);
-				cols = Math.round($(window).width() / 6.8);
-				return {
-					cols : cols,
-					rows : rows
-				};
-			};
-
-			var connectionId, doneResizing, evt, term;
-			connectionId = null;
-			termSize = computeMaxTerminalSize()
-			term = new Terminal({
-				cols : termSize.cols,
-				rows : termSize.rows,
-				useStyle : true,
-				screenKeys : true,
-				cursorBlink : true
-			});
-
-			evt = new EventSource("/leapfort/ssh/stream");
-			evt.addEventListener('connectionId', function(event) {
-				connectionId = event.data;
-				term.write("Connection established\r\n");
-				doneResizing();
-			});
-			evt.addEventListener('data', function(event) {
-				console.log('data', event);
-				term.write(JSON.parse(event.data));
-			});
-			evt.addEventListener('exit', function() {
-				evt.close();
-				term.write("\r\nTerminal exited.");
-			});
-			evt.addEventListener('error', function() {
-				evt.close();
-				term.write("\r\nTerminal exited.");
-			});
-
-			term.on('data', function(data) {
-				if (evt.readyState === EventSource.OPEN) {
-					$.post("/leapfort/ssh/send/" + connectionId, {
-						data : data
-					});
-				}
-			});
-			term.on('title', function(title) {
-				document.title = title;
-			});
-			var page_wrapper_div = $("#page-wrapper");
-			console.log(page_wrapper_div);
-			term.open(page_wrapper_div);
-
-			window.onresize = function(event) {
-				clearTimeout(this.id);
-				this.id = setTimeout(doneResizing, 500);
-			};
-			doneResizing = function() {
-				maxTermSize = computeMaxTerminalSize();
-				$.post("/api/v1/terminal/resize-window/" + connectionId, maxTermSize,
-						function(data) {
-							if (data && data.cols && data.rows) {
-								term.resize(data.cols, data.rows);
-							}
-						});
-			};	
-			</script>
-		</div>
+		<div id="page-wrapper" style="padding-left: 0"></div>
 
 	</div>
-
-	
+	<script src="js/jquery-1.12.3.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	
+	<script src="js/term.js"></script>
 	<script src="js/leapfort.js"></script>
 </body>
 </html>

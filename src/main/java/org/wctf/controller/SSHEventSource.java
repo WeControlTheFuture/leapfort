@@ -8,14 +8,13 @@ public class SSHEventSource implements EventSource {
 
 	@Override
 	public void onOpen(Emitter emitter) throws IOException {
-		// TODO Auto-generated method stub
-
+		emitter.comment("Start sending movement information.");
+		emitter.data("aaa");
+//		emitter.close();
 	}
 
 	@Override
 	public void onClose() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

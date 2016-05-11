@@ -9,6 +9,10 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>ssh</servlet-name> -->
+<!-- 		<servlet-class>org.wctf.controller.SSHEventSourceServlet</servlet-class> -->
+<!-- 	</servlet> -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -21,24 +25,63 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
+<!-- 	<filter> -->
+<!-- 		<filter-name>continuation</filter-name> -->
+<!-- 		<filter-class>org.eclipse.jetty.continuation.ContinuationFilter</filter-class> -->
+<!-- 	</filter> -->
 
+
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>ssh</servlet-name> -->
+<!-- 		<url-pattern>/ssh/stream/</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<servlet-name>springmvc</servlet-name>
 	</filter-mapping>
-	
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>continuation</filter-name> -->
+<!-- 		<url-pattern>/leapfort/ssh/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.map</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.woff</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.woff2</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.ttf</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.gif</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

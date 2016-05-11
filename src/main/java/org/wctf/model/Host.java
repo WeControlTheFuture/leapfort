@@ -3,7 +3,7 @@ package org.wctf.model;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name="host")
+@XmlRootElement(name = "host")
 @XmlType(propOrder = { "name", "ip", "port", "username", "password" })
 public class Host {
 	private String name;
@@ -11,6 +11,11 @@ public class Host {
 	private Integer port;
 	private String username;
 	private String password;
+
+	@Override
+	public String toString() {
+		return "Host [name=" + name + ", ip=" + ip + ", port=" + port + ", username=" + username + ", password=" + password + "]";
+	}
 
 	public String getName() {
 		return name;
