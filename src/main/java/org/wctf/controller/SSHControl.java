@@ -71,16 +71,9 @@ public class SSHControl {
 					byte[] data = new byte[instream.available()];
 					int nLen = instream.read(data);
 					String temp = new String(data, 0, nLen, "UTF-8");
-					String[] tmpArr = temp.split("\r\n", -1);
-					for (int i = 0; i < tmpArr.length; i++) {
-						ShellData shellData;
-						if (i != tmpArr.length - 1)
-							shellData = new ShellData(tmpArr[i], "\r\n");
-						else
-							shellData = new ShellData(tmpArr[i]);
-						writer.write("event:data\n");
-						writer.write("data: " + (new Gson()).toJson(shellData) + "\n\n");
-					}
+					ShellData shellData = new ShellData(temp);
+					writer.write("event:data\n");
+					writer.write("data: " + (new Gson()).toJson(shellData) + "\n\n");
 					writer.flush();
 				}
 			}
@@ -91,10 +84,8 @@ public class SSHControl {
 
 	@RequestMapping(value = "/send/{connectionId}", method = RequestMethod.POST)
 	public void send(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "connectionId") String connectionId, @RequestParam String data) {
-//		System.out.println("connectionId=======" + connectionId);
+		// System.out.println("connectionId=======" + connectionId);
 		System.out.println("send data===============" + data);
-		response.setContentType("text/event-stream");
-		response.setCharacterEncoding("UTF-8");
 		SessionThread sessionThread = SessionPool.getSessionThread(connectionId);
 		if (sessionThread != null) {
 			OutputStream outputStream = sessionThread.getOutputStream();

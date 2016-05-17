@@ -4,6 +4,7 @@ connectionId = uuid();
 // term = null
 
 $(function() {
+	initfileupload();
 	$.ajax({
 		url : "/leapfort/host/get",
 		success : function(obj) {
@@ -97,6 +98,18 @@ function initTerm() {
 	 * connectionId, maxTermSize, function(data) { if (data && data.cols &&
 	 * data.rows) { term.resize(data.cols, data.rows); } }); };
 	 */
+}
+
+function initfileupload(){
+	$('#file_upload').uploadify({
+     　　 'swf'     :'resources/uploadify.swf',
+   　　　 'uploader':'/leapfort/upload/'+connectionId,
+         'onUploadSuccess' : function(file, data, response){
+//        	 console.log(file);
+    	   console.log("data====",data);
+    	   console.log("response=========",response);
+       }
+  　　　});
 }
 
 function uuid() {

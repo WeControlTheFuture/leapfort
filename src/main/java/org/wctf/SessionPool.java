@@ -13,6 +13,7 @@ import org.wctf.model.Host;
 import org.wctf.util.JaxbUtil;
 
 import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -74,6 +75,17 @@ public final class SessionPool {
 			}
 		}
 
+		public ChannelSftp getSftpChannel() {
+			try {
+				Channel channel = session.openChannel("sftp");
+				channel.connect();
+				return (ChannelSftp) channel;
+			} catch (JSchException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
 		public Session getSession() {
 			return session;
 		}
@@ -113,9 +125,9 @@ public final class SessionPool {
 			for (String tmp : tmpArr) {
 				System.out.println("========" + tmp);
 			}
-//			System.out.println(temp.indexOf("\r\n"));
-//			System.out.println(temp.indexOf("\r"));
-//			System.out.println(temp.indexOf("\n"));
+			// System.out.println(temp.indexOf("\r\n"));
+			// System.out.println(temp.indexOf("\r"));
+			// System.out.println(temp.indexOf("\n"));
 			System.out.println(temp);
 			Thread.sleep(2000);
 		}

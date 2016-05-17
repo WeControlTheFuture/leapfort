@@ -73,6 +73,16 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.ttf</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.swf</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.php</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
